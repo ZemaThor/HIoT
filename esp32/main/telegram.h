@@ -1,13 +1,16 @@
-#ifndef TELEGRAM_CLIENT_H
-#define TELEGRAM_CLIENT_H
+#ifndef TELEGRAM_H
+#define TELEGRAM_H
 
+#include <UniversalTelegramBot.h>
 #include <WiFiClientSecure.h>
-#include <HTTPClient.h>
-#include <ArduinoJson.h>
+
+extern WiFiClientSecure secured_client;
+extern UniversalTelegramBot bot;
 
 void initTelegram();
-bool sendTelegramMessage(const char* message);
-void sendSensorReadings(float temp, float hum);
-void checkDailyReport();
+void handleTelegramMessages();
+bool sendTelegramMessage(const String &message);
+void sendSensorReadings(float temp, float hum, const String &node);
+void checkDailyReport(const String &node);
 
 #endif

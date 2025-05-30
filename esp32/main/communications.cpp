@@ -7,9 +7,10 @@
 #include "user_interface.h"
 
 char currentSSID[32] = "N/A";  // Inicializa com um valor padrão
-char currentIP[16] = "N/A";    
-
+char currentIP[16] = "N/A";
 char macSuffix[7] = {0};
+
+
 bool isAccessPoint = false;
 bool timeIsValid = false;
 unsigned long lastWifiReconnectAttempt = 0;

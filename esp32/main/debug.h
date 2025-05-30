@@ -2,8 +2,8 @@
 #define DEBUG_H
 
 // Para ativar as mensagens de debug e warning, descomente as linhas abaixo:
-#define DEBUG
-#define WARNING
+//#define DEBUG
+//#define WARNING
 
 #ifdef DEBUG
   #define DEBUG_PRINT(x)    Serial.print(x)

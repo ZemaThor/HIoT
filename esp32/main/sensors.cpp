@@ -7,6 +7,7 @@
 #include <DHT.h>
 #include "mqtt_client.h"
 #include "telegram.h"
+#include "communications.h"
 
 DHT dht(DHT11_PIN, DHTTYPE);
 
@@ -68,6 +69,11 @@ void sensorTask() {
         DEBUG_PRINTLN("Warning: No valid sensor data yet");
         return;
     }
+    //nome do no
+      char hostname[16] = {0};
+      sprintf(hostname, "esp32-%s", macSuffix);
+
+
     // --- Detecção de long press do botão para alternar o modo ---
     bool currentButton = digitalRead(BUTTON_PIN);
 
@@ -123,7 +129,7 @@ void sensorTask() {
         float hum  = readHumidity();
 
         //Envia ao telegram
-        sendSensorReadings(temp, hum);
+        sendSensorReadings(temp, hum, hostname);
         // Envia os valores via MQTT se estiver conectado
         if (mqttConnected()) {
             mqttPublishSensorReading("temperature", temp);
@@ -139,6 +145,6 @@ void sensorTask() {
         // Exibe os valores na página do OLED
         uiEnqueueMessageF(MessagePriority::PRIO_NORMAL, "Temp: %.2f°C\nHum: %.2f%%", temp, hum);
     }
-    checkDailyReport(); // Add this at end of function
+    checkDailyReport(hostname); // Add this at end of function
 
 }

@@ -9,8 +9,8 @@ bool isWiFiConnected(); // Restaurada a função para verificação da conexão 
 
 extern char currentSSID[32];
 extern char currentIP[16];
+extern char macSuffix[7];
 
-extern char macSuffix[7];  
 extern bool isAccessPoint;
 extern bool timeIsValid;
 extern unsigned long lastWifiReconnectAttempt;
