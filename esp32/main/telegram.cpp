@@ -4,13 +4,13 @@
 #include <time.h>
 #include <WiFi.h>
 
-WiFiClientSecure client;
+WiFiClientSecure myhttpclient;
 float minTemp = 100.0, maxTemp = -100.0;
 float minHum = 100.0, maxHum = 0.0;
 time_t lastResetTime = 0;
 
 void initTelegram() {
-  client.setInsecure(); // For simple TLS (adjust for production)
+  myhttpclient.setInsecure(); // For simple TLS (adjust for production)
 }
 
 bool sendTelegramMessage(const char* message) {
@@ -19,7 +19,7 @@ bool sendTelegramMessage(const char* message) {
   HTTPClient https;
   String url = "https://api.telegram.org/bot" + String(TELEGRAM_BOT_TOKEN) + "/sendMessage";
   
-  https.begin(client, url);
+  https.begin(myhttpclient, url);
   https.addHeader("Content-Type", "application/json");
 
   DynamicJsonDocument doc(256);
