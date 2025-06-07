@@ -1,0 +1,43 @@
+Main
+
+-Oled
+--Inicia o oled (coloca flag a TRUE)
+--Define a stack de mensagem a apresentar
+--Mostra no oled
+--->Função para mostrar icons
+--->Função para mostrar texto 
+--Limpa o oled
+
+-Sensores (coloca flag a TRUE)
+--Inicia o sensor, faz a primeira leitura e grava em variaveis globais
+--Faz leitura de temperatura a cada 15s (variavel)
+--Faz leitura de humidade a cada 15s (variavel)
+--Mantêm o registo dos máximos e minimos
+
+-MQTT
+--Inicia mqtt (coloca flag a TRUE)
+--Envia dados mqtt
+--Recebe dados mqtt
+
+-Telegram (coloca flag a TRUE)
+--Envia dados telegram
+--Recebe dados telegram
+---Recebe comando para forçar envio de dados
+---- Update - Lê e envia Temp e Humidade
+---- Status - Envia os maximos e minimos
+
+-User_interface
+--Define o butão
+--Define se a leitura é a cada 15s ou se vai pelo NTP (se NTP não disponível então fica a 15s)
+
+-Communications
+--Define o nome do nó (variável global)
+--Liga ao wifi
+---Liga ao NTP e coloca a hora
+--Liga AP se necessário
+---Coloca a hora como sendo 1970
+--Cria flag NTP e guarda como globla a hora
+
+-webserver ?
+--Cria o webserver com uma pagina com a hora e últimas leituras
+--Recebe o comando para forçar leitura
