@@ -56,4 +56,6 @@ void loop() {
     uiEnqueueMessageF(MessagePriority::PRIO_HIGH, 
                      "Low Memory: %d bytes", ESP.getFreeHeap());
   }
+
+  handleTelegramMessages(); // Add this line
 }
