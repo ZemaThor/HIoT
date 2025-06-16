@@ -1,19 +1,24 @@
 #include <Arduino.h>
-#include "config.h"
+#include <ArduinoOTA.h>
 
-// put function declarations here:
-int myFunction(int, int);
+#include "config.h"
+#include "communication.h"
+
+unsigned long lastPageChange = 0;
 
 void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+    Serial.begin(115200);
+
+    pinMode(BUTTON_PIN, INPUT_PULLUP);
+
+    lastPageChange = millis();
+    DEBUG_PRINTLN("Booting...");
+    //Start the network interface if possible
+    DEBUG_PRINTLN("Network Setup starting...");
+    initNetwork();
+
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-}
-
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+  ArduinoOTA.handle();
 }
