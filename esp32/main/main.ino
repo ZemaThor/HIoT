@@ -6,13 +6,14 @@
 #include "mqtt_client.h"
 #include "user_interface.h"
 #include "telegram.h"
+#include <ArduinoOTA.h>
 
 extern char lastMessage[64];
 extern const char* getLastMqttMessage();
 
 unsigned long lastPageChange = 0;
 unsigned long lastButtonCheck = 0;
-const unsigned long buttonCheckInterval = 100;  // Verificação do botão a cada 100ms
+const unsigned long buttonCheckInterval = 100;
 
 void setup() {
   Serial.begin(115200);
@@ -23,7 +24,7 @@ void setup() {
   initNetwork();
   mqttInit();
   initTelegram();
-  sendTelegramMessage("🔔 ESP32 Online!"); // Test message
+  sendTelegramMessage("🔔 ESP32 Online!");
 
   lastPageChange = millis();
   uiEnqueueMessage("System Booting...", MessagePriority::PRIO_LOW);
@@ -57,5 +58,7 @@ void loop() {
                      "Low Memory: %d bytes", ESP.getFreeHeap());
   }
 
-  handleTelegramMessages(); // Add this line
+  handleTelegramMessages();
+  ArduinoOTA.handle();
+
 }
